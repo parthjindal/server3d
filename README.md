@@ -14,13 +14,18 @@ applications. At the moment this consists of the following images:
 
 ## Quickstart
 
-A Docker compose file is provided to quickly bring up the simulation server and RoboViz:
+A Docker compose file is provided to quickly bring up the simulation
+server and RoboViz:
 
     docker-compose up
 
+The RoboViz image requires the [NVIDIA Container Runtime
+(`nvidia-docker2`)](https://github.com/NVIDIA/nvidia-docker).
+
 ## Advanced Usage
 
-There are two main ways to run your own agents and have them communicate with the server:
+There are two main ways to run your own agents and have them
+communicate with the server:
 
 ### 1. Run in a container with docker compose
 
