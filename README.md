@@ -14,13 +14,25 @@ applications. At the moment this consists of the following images:
 
 ## Quickstart
 
-A Docker compose file is provided to quickly bring up the simulation
-server and RoboViz:
+Docker compose files are provided to quickly bring up the simulation
+server and RoboViz. If you have an NVidia GPU and use the official
+NVidia drivers, use the `nvidia` compose files:
 
-    docker-compose up
+    docker-compose -f docker-compose.nvidia.yml up
 
-The RoboViz image requires the [NVIDIA Container Runtime
-(`nvidia-docker2`)](https://github.com/NVIDIA/nvidia-docker).
+This requires the [NVIDIA Container Runtime
+(`nvidia-docker2`)](https://github.com/NVIDIA/nvidia-docker) to be
+installed in order to run correctly.
+
+In any other situation, try the `mesa` files:
+
+    docker-compose -f docker-compose.mesa.yml up
+
+You should see messages about `rcssserver3d` and `roboviz` starting
+up, with a Roboviz window being opened showing the simulation. If this
+doesn't work, most likely when you have a different GPU with
+proprietary drivers, a merge request for that platform would be very
+welcome.
 
 ## Advanced Usage
 
@@ -44,15 +56,16 @@ provided with the server:
 ### 2. Run agents natively
 
 If you have your agents compiled natively on your host machine, you
-have to run the server with ports published to your host. This can be
-done by using the `run.sh` scripts provided along with the Docker
-files:
+have to run the server with ports published to your host. Examples of
+this can be found by using the `run.sh` scripts provided along with the
+Docker files:
 
     cd rcsserver3d && ./run.sh
     [ new terminal ]
-    cd roboviz && ./run.sh
+    cd roboviz && ./run.sh mesa
 
-The server's ports 3100 and 3200 are then reachable on the local host.
+Use `nvidia` instead of `mesa` if applicable. The server's ports 3100
+and 3200 are then reachable on the local host.
 
 ## Troubleshooting
 
