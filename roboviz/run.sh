@@ -3,6 +3,11 @@
 GFX=$1
 shift
 
+if [ "x$GFX" = "x" ]; then
+    echo "Usage: run.sh mesa|nvidia"
+    exit 1
+fi
+
 if [ "$GFX" = "nvidia" ]; then
     RUNTIME="--runtime nvidia"
 else
