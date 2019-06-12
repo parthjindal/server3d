@@ -3,8 +3,7 @@ services:
   rcssserver3d:
     image: rcss3d/rcssserver3d:latest
   roboviz:
-    image: rcss3d/roboviz:latest
-    runtime: nvidia
+    image: rcss3d/roboviz:mesa-latest
     volumes:
       - "/tmp/.X11-unix:/tmp/.X11-unix:rw"
       - "/home/${USER}/.Xauthority:/root/.Xauthority"
