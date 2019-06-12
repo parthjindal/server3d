@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libboost-regex1.65.1 libboost-system1.65.1 libboost-thread1.65.1 \
     && apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
-ARG RCSSSERVER3D_RELEASE=0.7.1
+ARG RCSSSERVER3D_RELEASE=0.7.2
 
 RUN buildDeps='g++ cmake git libfreetype6-dev libode-dev libsdl-dev ruby-dev libdevil-dev libboost-dev libboost-thread-dev libboost-regex-dev libboost-system-dev libqt4-opengl-dev'; \
     apt-get update && apt-get install -y --no-install-recommends $buildDeps \
