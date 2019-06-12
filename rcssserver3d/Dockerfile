@@ -3,9 +3,9 @@ FROM ubuntu:18.04
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libfreetype6 libode6 libsdl1.2debian ruby libdevil1c2 qt4-default \
     libboost-regex1.65.1 libboost-system1.65.1 libboost-thread1.65.1 \
-    && apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-ARG RCSSSERVER3D_RELEASE=0.7.1
+ARG RCSSSERVER3D_RELEASE=0.7.2
 
 RUN buildDeps='g++ cmake git libfreetype6-dev libode-dev libsdl-dev ruby-dev libdevil-dev libboost-dev libboost-thread-dev libboost-regex-dev libboost-system-dev libqt4-opengl-dev'; \
     apt-get update && apt-get install -y --no-install-recommends $buildDeps \
@@ -13,7 +13,7 @@ RUN buildDeps='g++ cmake git libfreetype6-dev libode-dev libsdl-dev ruby-dev lib
     && mkdir -p /tmp/SimSpark/spark/build && cd /tmp/SimSpark/spark/build && cmake -DRVDRAW=ON .. && make -j$(nproc) && make install && ldconfig \
     && mkdir -p /tmp/SimSpark/rcssserver3d/build && cd /tmp/SimSpark/rcssserver3d/build && cmake -DRVDRAW=ON .. && make -j$(nproc) && make install && ldconfig \
     && rm -fr /tmp/SimSpark \
-    && apt-get purge -y --auto-remove $buildDeps && rm -rf /var/lib/apt/lists/*
+    && apt-get purge -y --auto-remove $buildDeps && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV LD_LIBRARY_PATH=/usr/local/lib/simspark:/usr/local/lib/rcssserver3d
 

@@ -79,3 +79,23 @@ which can be done by running:
 When finished, you can remove this permission again by running:
 
     xhost -"local:docker@"
+
+### RCSSServer3D is not the latest version
+
+The Docker Compose files and the `run.sh` script use the `latest`
+Docker image tags. This really just means 'the latest version you have
+downloaded', not necessarily 'the latest version available'. To get
+the latest version, you have to explicitly 'pull' it. You can do this
+with `docker` directly:
+
+    docker pull rcss3d/rcssserver3d:latest
+
+You can also use Docker Compose which ensures that both the
+`rcssserver3d` and the `roboviz` image are up to date in one go:
+
+    docker-compose -f docker-compose.nvidia.yml pull
+
+Again, use the `mesa` version if applicable.
+
+Alternatively you can edit the compose file or run-script to specify
+an explicit version you want to use, instead of `latest`.
