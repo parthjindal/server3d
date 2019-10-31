@@ -1,4 +1,8 @@
 FROM ubuntu:18.04
+LABEL maintaner="robocup3d@163.com"
+EXPOSE 3100/tcp
+EXPOSE 3200/tcp
+
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libfreetype6 libode6 libsdl1.2debian ruby libdevil1c2 qt4-default \
@@ -18,3 +22,4 @@ RUN buildDeps='g++ cmake git libfreetype6-dev libode-dev libsdl-dev ruby-dev lib
 ENV LD_LIBRARY_PATH=/usr/local/lib/simspark:/usr/local/lib/rcssserver3d
 
 ENTRYPOINT ["rcssserver3d"]
+
