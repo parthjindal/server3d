@@ -22,5 +22,5 @@ RUN buildDeps='g++ cmake git libfreetype6-dev libode-dev libsdl-dev ruby-dev lib
 
 ENV LD_LIBRARY_PATH=/usr/local/lib/simspark:/usr/local/lib/rcssserver3d
 
-ENTRYPOINT ["bash"]
+ENTRYPOINT ["rcssserver3d"]
 
