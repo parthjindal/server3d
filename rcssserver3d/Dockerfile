@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ARG RCSSSERVER3D_RELEASE=0.7.2
 
 RUN buildDeps='g++ cmake git libfreetype6-dev libode-dev libsdl-dev ruby-dev libdevil-dev libboost-dev libboost-thread-dev libboost-regex-dev libboost-system-dev libqt4-opengl-dev'; \
-    apt-get update && apt-get install -y --no-install-recommends $buildDeps \
+    sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list \
+	&& apt-get update && apt-get install -y --no-install-recommends $buildDeps \
     && git clone --branch RCSSSERVER3D_${RCSSSERVER3D_RELEASE}_RELEASE --depth 1 https://gitlab.com/robocup-sim/SimSpark.git /tmp/SimSpark \
     && mkdir -p /tmp/SimSpark/spark/build && cd /tmp/SimSpark/spark/build && cmake -DRVDRAW=ON .. && make -j$(nproc) && make install && ldconfig \
     && mkdir -p /tmp/SimSpark/rcssserver3d/build && cd /tmp/SimSpark/rcssserver3d/build && cmake -DRVDRAW=ON .. && make -j$(nproc) && make install && ldconfig \
