@@ -34,7 +34,7 @@ ENV LD_LIBRARY_PATH=/usr/local/lib/simspark:/usr/local/lib/rcssserver3d
 
 # first run to generate ~/.simspark
 # docker run -e TASK_BRANCH="walk-optim" -e MASTER_HOST="robocup3d.cn:65000"
-ENTRYPOINT if [ ! -e ~/.simspark ]; then timeout -s 9 5 rcssserver3d || echo 'first run rcssserver3d'; fi \
+ENTRYPOINT if [ ! -e ~/.simspark ]; then timeout -s 9 1 rcssserver3d || echo 'first run rcssserver3d'; fi \
     && cd /ut3d && git pull && git checkout ${TASK_BRANCH} && make -j$(nproc) && cd optimization \
     && bash prebuild.sh && bash run.sh \
-    || echo 'ERROR!' && bash
+    || echo 'ERROR occured!Turn into shell to debug!' && bash
