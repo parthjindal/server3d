@@ -2,22 +2,22 @@ version: '2.3'
 
 services:
   rcssserver3d:
-    build: 
-      context: ./rcssserver3d/
-    image: rcssserver3d
+    # build: 
+    #   context: ./rcssserver3d/
+    image: parthjindal/rcssserver3d:latest
     environment: 
       SERVER_PORT: "${SERVER_PORT}"
       AGENT_PORT: "${AGENT_PORT}"
     ports: 
     - "3100:${AGENT_PORT}"  #TODO
-
     command: ["--agent-port","${AGENT_PORT}","--server-port","${SERVER_PORT}"]
+    
   roboviz:
-    build: 
-      context: ./roboviz/nvidia
-      args: 
-        ROBOVIZ_RELEASE: 1.7.0
-    image: roboviz:nvidia
+    # build: 
+    #   context: ./roboviz/nvidia
+    #   args: 
+    #     ROBOVIZ_RELEASE: 1.7.0
+    image: parthjindal/roboviz:nvidia-1.7
     runtime: nvidia
     volumes:
       - "/tmp/.X11-unix:/tmp/.X11-unix:rw"
