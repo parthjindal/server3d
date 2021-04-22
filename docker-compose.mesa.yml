@@ -2,26 +2,20 @@ version: '2.3'
 
 services:
   rcssserver3d:
-    # build: 
-    #   context: ./rcssserver3d/
     image: parthjindal/rcssserver3d:latest
     environment: 
       SERVER_PORT: "${SERVER_PORT}"
       AGENT_PORT: "${AGENT_PORT}"
     ports: 
-    - "3100:${AGENT_PORT}"  #TODO
+    - "${AGENT_PORT}:${AGENT_PORT}"
     command: ["--agent-port","${AGENT_PORT}","--server-port","${SERVER_PORT}"]
   roboviz:
-    build: 
-      context: ./roboviz/mesa
-      args: 
-        ROBOVIZ_RELEASE: 1.7.0
-    image: roboviz:mesa
+    image: parthjindal/roboviz:mesa-1.7
     volumes:
       - "/tmp/.X11-unix:/tmp/.X11-unix:rw"
-      - "/home/${USER}/.Xauthority:/root/.Xauthority"
+      - "/tmp/.docker.xauth:/tmp/.docker.xauth:rw"
     environment:
-      XAUTHORITY: /root/.Xauthority
+      XAUTHORITY: /tmp/.docker.xauth
       DISPLAY: ${DISPLAY}
     command: ["--serverHost=rcssserver3d","--serverPort=${SERVER_PORT}"]
     depends_on:
