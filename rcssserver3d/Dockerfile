@@ -18,6 +18,9 @@ RUN buildDeps='g++ cmake git libfreetype6-dev libode-dev libsdl-dev ruby-dev lib
 
 ENV LD_LIBRARY_PATH=/usr/local/lib/simspark:/usr/local/lib/rcssserver3d
 
+ENV AGENT_PORT=3200
+ENV SERVER_PORT=3100
+
 EXPOSE ${AGENT_PORT}/tcp
 EXPOSE ${SERVER_PORT}/tcp
 
