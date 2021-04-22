@@ -1,9 +1,20 @@
 version: '2.3'
+
 services:
   rcssserver3d:
-    image: rcss3d/rcssserver3d:latest
+    build: 
+      context: ./rcssserver3d/
+    image: rcssserver3d
+    environment: 
+      SERVER_PORT: "${SERVER_PORT}"
+      AGENT_PORT: "${AGENT_PORT}"
+    command: ["--agent-port","${AGENT_PORT}","--server-port","${SERVER_PORT}"]
   roboviz:
-    image: rcss3d/roboviz:nvidia-latest
+    build: 
+      context: ./roboviz/nvidia
+      args: 
+        ROBOVIZ_RELEASE: 1.7.0
+    image: roboviz:nvidia
     runtime: nvidia
     volumes:
       - "/tmp/.X11-unix:/tmp/.X11-unix:rw"
@@ -11,6 +22,6 @@ services:
     environment:
       XAUTHORITY: /root/.Xauthority
       DISPLAY: ${DISPLAY}
-    command: ["--serverHost=rcssserver3d"]
+    command: ["--serverHost=rcssserver3d","--serverPort=${SERVER_PORT}"]
     depends_on:
       - rcssserver3d
