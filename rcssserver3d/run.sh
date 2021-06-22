@@ -10,5 +10,5 @@ docker run \
        -d -it --rm \
        --name rcssserver3d \
        --mount type=bind,source=$source_dir,target=/app \
-       rcss3d/rcssserver3d:latest
+       parthjindal/rcssserver3d:latest
 

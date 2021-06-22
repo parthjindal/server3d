@@ -8,6 +8,7 @@ services:
       AGENT_PORT: "${AGENT_PORT}"
     ports: 
     - "${AGENT_PORT}:${AGENT_PORT}"
+    - "${SERVER_PORT}:${SERVER_PORT}"
     command: ["--agent-port","${AGENT_PORT}","--server-port","${SERVER_PORT}"]
     
   roboviz:
