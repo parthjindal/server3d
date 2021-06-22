@@ -1,12 +1,14 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 if [ -z "$NETWORK" ]; then
     NETWORK=host
 fi
 
+source_dir=$1
 docker run \
        --network $NETWORK \
-       -ti --rm \
+       -d -it --rm \
        --name rcssserver3d \
-       rcss3d/rcssserver3d:latest $@
+       --mount type=bind,source=$source_dir,target=/app \
+       rcss3d/rcssserver3d:latest
 

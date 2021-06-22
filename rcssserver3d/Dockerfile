@@ -14,7 +14,8 @@ RUN buildDeps='g++ cmake git libfreetype6-dev libode-dev libsdl-dev ruby-dev lib
     && mkdir -p /tmp/SimSpark/spark/build && cd /tmp/SimSpark/spark/build && cmake -DRVDRAW=ON .. && make -j$(nproc) && make install && ldconfig \
     && mkdir -p /tmp/SimSpark/rcssserver3d/build && cd /tmp/SimSpark/rcssserver3d/build && cmake -DRVDRAW=ON .. && make -j$(nproc) && make install && ldconfig \
     && rm -fr /tmp/SimSpark \
-    && apt-get purge -y --auto-remove $buildDeps && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && apt-get purge -y --auto-remove $buildDeps && apt-get clean && rm -rf /var/lib/apt/lists/* \
+    && apt-get update && apt-get install -y cmake git g++ tmux libboost-all-dev && apt-get update 
 
 ENV LD_LIBRARY_PATH=/usr/local/lib/simspark:/usr/local/lib/rcssserver3d
 
@@ -24,5 +25,5 @@ ENV SERVER_PORT=3100
 EXPOSE ${AGENT_PORT}/tcp
 EXPOSE ${SERVER_PORT}/tcp
 
-ENTRYPOINT ["rcssserver3d"]
+ENTRYPOINT ["bash"]
 
